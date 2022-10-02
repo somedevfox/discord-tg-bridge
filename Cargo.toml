@@ -1,0 +1,32 @@
+[package]
+name = "discord-tg-bridge"
+version = "0.1.0"
+edition = "2021"
+license = "GPLv3"
+author = "Egor Poleshko <somedevfox@gmail.com>"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+figment = { version = "0.10", features = ["env", "toml"] } # Config Loader
+serde = { version = "1", features = ["derive"] }           # Serialization (required by `figment` and `toml`)
+toml = "0.5"                                               # TOML File Format Parsing Library
+gettext = "0.4"                                            # i18n
+tui = "0.19"                                               # Text User Interface Library
+crossterm = "0.25"                                         # Backend for `tui`
+lazy_static = "1.4"                                        # Runtime evaluated statics
+tokio = { version = "1.0", features = ["macros", "rt-multi-thread"] }
+
+# Discord API Wrapper for Rust
+[dependencies.serenity]
+version = "0.11"
+default-features = false
+features = [
+	"builder",
+	"cache",
+	"client",
+	"collector",
+	"gateway",
+	"http",
+	"rustls_backend"
+]
