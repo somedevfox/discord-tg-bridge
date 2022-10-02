@@ -132,6 +132,13 @@ pub fn generate_config(term: &mut Terminal<CrosstermBackend<Stdout>>, catalog: &
 								config.telegram_token.push(c);
 							}
 						},
+						KeyCode::Backspace => {
+							if config_stage == ConfigurationStage::DiscordToken {
+								config.discord_token.pop();
+							} else if config_stage == ConfigurationStage::TelegramToken {
+								config.telegram_token.pop();
+							}
+						},
 						KeyCode::Enter => {
 							match config_stage {
 								ConfigurationStage::Language => {
@@ -162,6 +169,7 @@ pub fn generate_config(term: &mut Terminal<CrosstermBackend<Stdout>>, catalog: &
 			}
 		}).unwrap();
 		if should_break {
+			term.clear().unwrap();
 			break
 		}
 	}
